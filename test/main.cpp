@@ -1,10 +1,10 @@
 #include "DarkStar/Engine.h"
 #include <iostream>
 
-int main() {
-    Engine::Engine Engine;
+int main()
+{
+	DarkStar::Engine Engine;
+	Engine.Start();
 
-	std::cout << "Working as intended" << '\n';
-
-    return 0;
+	return 0;
 }
