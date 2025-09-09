@@ -1,16 +1,18 @@
-//
-// Created by deimos on 9/9/25.
-//
+#pragma once
 
-#ifndef DARKSTAR_APPLICATION_H
-#define DARKSTAR_APPLICATION_H
+#include "DarkStar/Core.h"
 
-namespace DarkStar {
+namespace DarkStar
+{
+	class DARKSTAR_API Application
+	{
+		public:
+		Application() = default;
+		virtual ~Application() = default;
 
-class Application {
+		void Run();
+	};
 
-};
-
-} // DarkStar
-
-#endif //DARKSTAR_APPLICATION_H
+	// To be defined in the Client App
+	Application* CreateApplication();
+}

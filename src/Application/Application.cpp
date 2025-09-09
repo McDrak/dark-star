@@ -1,8 +1,12 @@
-//
-// Created by deimos on 9/9/25.
-//
+#include "DarkStar/Application/Application.h"
 
-#include "Application.h"
+#include "DarkStar/Engine/Engine.h"
 
-namespace DarkStar {
-} // DarkStar
+namespace DarkStar
+{
+	void Application::Run()
+	{
+		DarkStar::Engine Engine;
+		Engine.Start();
+	}
+}

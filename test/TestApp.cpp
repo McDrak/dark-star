@@ -1,9 +1,13 @@
-#include "DarkStar/Engine/Engine.h"
+#include "DarkStar.h"
 
-int main()
+class Test : public DarkStar::Application
 {
-	DarkStar::Engine Engine;
-	Engine.Start();
+public:
+	Test() = default;
+	~Test() override = default;
+};
 
-	return 0;
+DarkStar::Application* DarkStar::CreateApplication()
+{
+	return new Test();
 }

@@ -1,6 +1,6 @@
 # Dark Star Engine
 
-DarkStar is a WIP cross-platform 2D game engine for my personal projects. Obviously, is not commercial ready.
+DarkStar is a WIP cross-platform 2D game engine for my personal projects. Obviously, is not commercial ready. While I'm learning, the engine will work as a Static Library, but the idea is to move it to a Shared Library.
 
 ## Components
 - [CMake](https://cmake.org/) for building.
@@ -15,3 +15,4 @@ DarkStar is a WIP cross-platform 2D game engine for my personal projects. Obviou
 - [ ] Set up the Logging System
 - [ ] Set up the Physics System
 - [ ] Set up the Memory Manager
+- [ ] Switch to Shared Library

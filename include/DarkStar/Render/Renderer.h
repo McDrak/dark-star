@@ -1,11 +1,12 @@
-#ifndef RENDERER_H
-#define RENDERER_H
+#pragma once
+
+#include "DarkStar/Core.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
 namespace DarkStar
 {
-	class Renderer
+	class DARKSTAR_API Renderer
 	{
 	public:
 		Renderer();
@@ -23,5 +24,3 @@ namespace DarkStar
 		sf::RenderWindow m_Window;
 	};
 }
-
-#endif // RENDERER_H

@@ -1,3 +1,3 @@
-add_executable(DarkStarTest main.cpp)
+add_executable(DarkStarTest TestApp.cpp)
 
 target_link_libraries(DarkStarTest PRIVATE DarkStarEngine)

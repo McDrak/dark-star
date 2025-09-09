@@ -1,5 +1,7 @@
 #pragma once
 
+// For use by DarkStar applications
 #include "DarkStar/Application/Application.h"
-#include "DarkStar/Render/Renderer.h"
-#include "DarkStar/Engine/Engine.h"
+
+// Entry Point
+#include "DarkStar/EntryPoint.h"

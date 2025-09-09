@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../Render/Renderer.h"
+#include "DarkStar/Render/Renderer.h"
+#include "DarkStar/Core.h"
 
 namespace DarkStar
 {
-	class Engine
+	class DARKSTAR_API Engine
 	{
 	public:
 		Engine();
