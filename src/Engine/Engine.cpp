@@ -1,4 +1,4 @@
-#include "DarkStar/Engine.h"
+#include "../../include/DarkStar/Engine/Engine.h"
 
 DarkStar::Engine::Engine()
 	: m_Renderer{800, 600, "Test"}

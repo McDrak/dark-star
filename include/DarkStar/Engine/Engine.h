@@ -1,7 +1,6 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#pragma once
 
-#include "Render/Renderer.h"
+#include "../Render/Renderer.h"
 
 namespace DarkStar
 {
@@ -17,5 +16,3 @@ namespace DarkStar
 		Renderer m_Renderer;
 	};
 }
-
-#endif // ENGINE_H
