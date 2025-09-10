@@ -27,7 +27,9 @@ namespace DarkStar
 	void Renderer::Render()
 	{
 		sf::Font font;
-		if (!font.openFromFile("../../assets/fonts/Roboto-Regular.ttf"))
+		// For this to work this way, the IDE should set "Working Directory" as the repository root folder in the Configuration Settings.
+		// TODO: This will be changed when the Asset Manager is fully implemented (hopefully) - 10/09/25
+		if (!font.openFromFile("assets/fonts/Roboto-Regular.ttf"))
 		{
 			std::cout << "Error loading font" << '\n';
 			return;
