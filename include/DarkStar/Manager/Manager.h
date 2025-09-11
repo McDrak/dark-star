@@ -1,8 +1,10 @@
 #pragma once
 
+#include "DarkStar/Core.h"
+
 namespace DarkStar
 {
-	class Manager
+	class DARKSTAR_API Manager
 	{
 	public:
 		Manager() = default;

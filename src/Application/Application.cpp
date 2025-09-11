@@ -6,9 +6,9 @@ namespace DarkStar
 {
 	void Application::Run()
 	{
-		DarkStar::Engine Engine;
-		Engine.Init();
-		Engine.Run();
-		Engine.Shutdown();
+		Engine engine;
+		engine.Init();
+		engine.Run();
+		engine.Shutdown();
 	}
 }

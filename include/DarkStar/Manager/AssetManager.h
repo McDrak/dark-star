@@ -4,7 +4,7 @@
 
 namespace DarkStar
 {
-	class AssetManager : public Manager
+	class DARKSTAR_API AssetManager : public Manager
 	{
 	public:
 		AssetManager() = default;

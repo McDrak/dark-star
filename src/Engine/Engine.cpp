@@ -1,12 +1,13 @@
 #include "DarkStar/Engine/Engine.h"
 
 #include "DarkStar/Manager/AssetManager.h"
+#include "DarkStar/Manager/LogManager.h"
 #include "DarkStar/Manager/RenderManager.h"
 
 namespace DarkStar
 {
 	Engine::Engine()
-		: m_AssetManager(nullptr), m_RenderManager(nullptr)
+		: m_LogManager(nullptr), m_AssetManager(nullptr), m_RenderManager(nullptr)
 	{
 	}
 
@@ -16,6 +17,8 @@ namespace DarkStar
 
 	void Engine::Init()
 	{
+		m_LogManager = std::make_unique<LogManager>();
+		m_LogManager->Startup();
 		m_AssetManager = std::make_unique<AssetManager>();
 		m_AssetManager->Startup();
 		m_RenderManager = std::make_unique<RenderManager>();
@@ -24,6 +27,7 @@ namespace DarkStar
 
 	void Engine::Run()
 	{
+		m_LogManager->Run();
 		m_AssetManager->Run();
 		m_RenderManager->Run();
 	}
@@ -32,5 +36,6 @@ namespace DarkStar
 	{
 		m_RenderManager->Shutdown();
 		m_AssetManager->Shutdown();
+		m_LogManager->Shutdown();
 	}
 }

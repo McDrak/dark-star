@@ -1,5 +1,7 @@
 #include "DarkStar/Manager/RenderManager.h"
 
+#include "DarkStar/Manager/LogManager.h"
+
 namespace DarkStar
 {
 	 RenderManager::RenderManager()
@@ -9,6 +11,7 @@ namespace DarkStar
 
 	void RenderManager::Startup()
 	{
+		DS_CORE_TRACE("Render Manager Startup");
 		m_Renderer.Init();
 	}
 
@@ -19,5 +22,6 @@ namespace DarkStar
 
 	void RenderManager::Shutdown()
 	{
+		DS_CORE_TRACE("Render Manager Shutdown");
 	}
 }

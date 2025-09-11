@@ -5,7 +5,7 @@
 
 namespace DarkStar
 {
-	class RenderManager : public Manager
+	class DARKSTAR_API RenderManager : public Manager
 	{
 	public:
 		RenderManager();

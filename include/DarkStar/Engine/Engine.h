@@ -6,6 +6,7 @@
 
 namespace DarkStar
 {
+	class LogManager;
 	class AssetManager;
 	class RenderManager;
 
@@ -20,6 +21,7 @@ namespace DarkStar
 		void Shutdown();
 
 	private:
+		std::unique_ptr<LogManager> m_LogManager;
 		std::unique_ptr<AssetManager> m_AssetManager;
 		std::unique_ptr<RenderManager> m_RenderManager;
 	};

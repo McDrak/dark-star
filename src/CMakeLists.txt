@@ -8,3 +8,6 @@ target_include_directories(DarkStarEngine PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # Link SFML
 target_link_libraries(DarkStarEngine PUBLIC sfml-system sfml-window sfml-graphics)
+
+#Link SPDLOG
+target_link_libraries(DarkStarEngine PUBLIC spdlog)
