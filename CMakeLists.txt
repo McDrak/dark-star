@@ -13,5 +13,9 @@ FetchContent_Declare(
 )
 FETCHCONTENT_MAKEAVAILABLE(SFML)
 
+IF (MSVC OR MSYS OR MINGW)
+    add_definitions(-DDARKSTAR_BUILD_DLL)
+ENDIF ()
+
 add_subdirectory(src)
 add_subdirectory(test)
