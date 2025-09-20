@@ -17,12 +17,13 @@ namespace DarkStar
 
 	void Engine::Init()
 	{
-		m_LogManager = std::make_unique<LogManager>();
+		m_LogManager = std::make_shared<LogManager>();
 		m_LogManager->Startup();
-		m_AssetManager = std::make_unique<AssetManager>();
+		m_AssetManager = std::make_shared<AssetManager>();
 		m_AssetManager->Startup();
-		m_RenderManager = std::make_unique<RenderManager>();
+		m_RenderManager = std::make_shared<RenderManager>();
 		m_RenderManager->Startup();
+		m_RenderManager->SetAssetManager(m_AssetManager);
 	}
 
 	void Engine::Run()

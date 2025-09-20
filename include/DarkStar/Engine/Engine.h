@@ -21,8 +21,8 @@ namespace DarkStar
 		void Shutdown();
 
 	private:
-		std::unique_ptr<LogManager> m_LogManager;
-		std::unique_ptr<AssetManager> m_AssetManager;
-		std::unique_ptr<RenderManager> m_RenderManager;
+		std::shared_ptr<LogManager> m_LogManager;
+		std::shared_ptr<AssetManager> m_AssetManager;
+		std::shared_ptr<RenderManager> m_RenderManager;
 	};
 }

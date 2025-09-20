@@ -11,3 +11,6 @@ target_link_libraries(DarkStarEngine PUBLIC sfml-system sfml-window sfml-graphic
 
 #Link SPDLOG
 target_link_libraries(DarkStarEngine PUBLIC spdlog)
+
+# Link JSON
+target_link_libraries(DarkStarEngine PUBLIC nlohmann_json::nlohmann_json)

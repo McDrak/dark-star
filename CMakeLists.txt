@@ -22,6 +22,14 @@ fetchcontent_declare(
 )
 fetchcontent_makeavailable(SPDLOG)
 
+# JSON helper tool (nlohmann)
+fetchcontent_declare(
+        JSON
+        GIT_REPOSITORY https://github.com/nlohmann/json
+        GIT_TAG v3.12.0
+)
+fetchcontent_makeavailable(JSON)
+
 # Windows specific compilation flag
 IF (MSVC OR MSYS OR MINGW)
     add_definitions(-DDARKSTAR_BUILD_DLL)

@@ -11,12 +11,19 @@ namespace DarkStar
 
 	void RenderManager::Startup()
 	{
-		DS_CORE_TRACE("Render Manager Startup");
+	 	DS_CORE_TRACE("Render Manager Startup");
 		m_Renderer.Init();
 	}
 
 	void RenderManager::Run()
-	{
+	 {
+	 	const auto& sharedAssetManager = m_AssetManager.lock();
+	 	if (!sharedAssetManager)
+	 	{
+	 		DS_CORE_CRITICAL("RenderManager::Startup - Error Loading the Manager");
+	 		return;
+	 	}
+	 	m_Renderer.SetAssetManager(sharedAssetManager);
 		m_Renderer.Render();
 	}
 

@@ -31,11 +31,11 @@ namespace DarkStar
 #define DS_CORE_INFO(...)	::DarkStar::LogManager::GetCoreLogger()->info(__VA_ARGS__)
 #define DS_CORE_WARN(...)	::DarkStar::LogManager::GetCoreLogger()->warn(__VA_ARGS__)
 #define DS_CORE_ERROR(...)	::DarkStar::LogManager::GetCoreLogger()->error(__VA_ARGS__)
-#define DS_CORE_FATAL(...)	::DarkStar::LogManager::GetCoreLogger()->fatal(__VA_ARGS__)
+#define DS_CORE_CRITICAL(...)	::DarkStar::LogManager::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client Log Macros
 #define DS_CLIENT_TRACE(...)	::DarkStar::LogManager::GetClientLogger()->trace(__VA_ARGS__)
 #define DS_CLIENT_INFO(...)	::DarkStar::LogManager::GetClientLogger()->info(__VA_ARGS__)
 #define DS_CLIENT_WARN(...)	::DarkStar::LogManager::GetClientLogger()->warn(__VA_ARGS__)
 #define DS_CLIENT_ERROR(...)	::DarkStar::LogManager::GetClientLogger()->error(__VA_ARGS__)
-#define DS_CLIENT_FATAL(...)	::DarkStar::LogManager::GetClientLogger()->fatal(__VA_ARGS__)
+#define DS_CLIENT_CRITICAL(...)	::DarkStar::LogManager::GetClientLogger()->critical(__VA_ARGS__)

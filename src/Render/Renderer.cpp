@@ -1,5 +1,8 @@
 #include "DarkStar/Render/Renderer.h"
 
+#include "DarkStar/Indetifiers.h"
+#include "DarkStar/Manager/AssetManager.h"
+#include "DarkStar/Manager/LogManager.h"
 #include "SFML/Graphics.hpp"
 #include <cstring>
 #include <iostream>
@@ -26,14 +29,13 @@ namespace DarkStar
 
 	void Renderer::Render()
 	{
-		sf::Font font;
-		// For this to work this way, the IDE should set "Working Directory" as the repository root folder in the Configuration Settings.
-		// TODO: This will be changed when the Asset Manager is fully implemented (hopefully) - 10/09/25
-		if (!font.openFromFile("assets/fonts/Roboto-Regular.ttf"))
+		const auto& sharedAssetManager = m_AssetManager.lock();
+		if (!sharedAssetManager)
 		{
-			std::cout << "Error loading font" << '\n';
+			DS_CORE_CRITICAL("Renderer::Render - Error Loading the Manager");
 			return;
 		}
+		auto& font = sharedAssetManager->GetAsset<Identifiers::Fonts, sf::Font>(Identifiers::Fonts::RobotoRegular);
 
 		sf::Text message(font);
 		message.setString("Test");

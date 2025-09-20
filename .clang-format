@@ -9,7 +9,7 @@ ColumnLimit: 120
 BreakBeforeBraces: Allman
 
 # Namespaces
-NamespaceIndentation: Inner
+NamespaceIndentation: All
 
 # Access modifier alignment in classes/structs
 AccessModifierOffset: -4
