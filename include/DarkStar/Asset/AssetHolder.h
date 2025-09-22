@@ -10,13 +10,13 @@
 namespace DarkStar
 {
 	template<typename Identifier, typename Asset>
-	class DARKSTAR_API AssetHolder
+	class DARKSTAR_API CAssetHolder
 	{
 		using LoaderFunction = std::function<bool(Asset&, const std::string&)>;
 
 	public:
-		AssetHolder() = default;
-		virtual ~AssetHolder() = default;
+		CAssetHolder() = default;
+		virtual ~CAssetHolder() = default;
 
 		void LoadAsset(const Identifier id, const std::string& filePath, LoaderFunction loaderFunction);
 		Asset& GetAsset(const Identifier id);
@@ -26,7 +26,7 @@ namespace DarkStar
 	};
 
 	template <typename Identifier, typename Asset>
-	void AssetHolder<Identifier, Asset>::LoadAsset(const Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
+	void CAssetHolder<Identifier, Asset>::LoadAsset(const Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
 	{
 		std::unique_ptr<Asset> assetPtr = std::make_unique<Asset>();
 		if (!loaderFunction(*assetPtr, filePath))
@@ -38,7 +38,7 @@ namespace DarkStar
 	}
 
 	template <typename Identifier, typename Asset>
-	Asset& AssetHolder<Identifier, Asset>::GetAsset(const Identifier id)
+	Asset& CAssetHolder<Identifier, Asset>::GetAsset(const Identifier id)
 	{
 		if (!m_Assets.contains(id))
 		{

@@ -2,14 +2,14 @@
 
 namespace DarkStar::Identifiers
 {
-	enum AssetTypes
+	enum EAssetTypes
 	{
 		Font,
 		Sound,
 		Texture
 	};
 
-	enum Fonts
+	enum EFonts
 	{
 		RobotoRegular
 	};

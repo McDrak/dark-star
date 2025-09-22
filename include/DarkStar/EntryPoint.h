@@ -1,12 +1,11 @@
 #pragma once
 
-extern DarkStar::Application* DarkStar::CreateApplication();
+extern std::unique_ptr<DarkStar::CApplication> DarkStar::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	DarkStar::Application* app = DarkStar::CreateApplication();
+	std::unique_ptr<DarkStar::CApplication> app = DarkStar::CreateApplication();
 	app->Run();
-	delete app;
 
 	return 0;
 }

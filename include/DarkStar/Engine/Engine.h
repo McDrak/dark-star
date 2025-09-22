@@ -1,28 +1,32 @@
 #pragma once
 
 #include "DarkStar/Core.h"
+#include "DarkStar/Application/Application.h"
 
 #include <memory>
 
 namespace DarkStar
 {
-	class LogManager;
-	class AssetManager;
-	class RenderManager;
+	class CLogManager;
+	class CAssetManager;
+	class CRenderManager;
 
-	class DARKSTAR_API Engine
+	class DARKSTAR_API CEngine
 	{
 	public:
-		Engine();
-		~Engine();
+		explicit CEngine(const SApplicationConfiguration& configuration);
+		~CEngine();
 
 		void Init();
 		void Run();
 		void Shutdown();
 
+		std::shared_ptr<CAssetManager> GetAssetManager() const { return m_AssetManager;}
+
 	private:
-		std::shared_ptr<LogManager> m_LogManager;
-		std::shared_ptr<AssetManager> m_AssetManager;
-		std::shared_ptr<RenderManager> m_RenderManager;
+		SApplicationConfiguration m_AppConfiguration;
+		std::shared_ptr<CLogManager> m_LogManager;
+		std::shared_ptr<CAssetManager> m_AssetManager;
+		std::shared_ptr<CRenderManager> m_RenderManager;
 	};
 }

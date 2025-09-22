@@ -5,10 +5,10 @@
 
 namespace DarkStar
 {
-	std::shared_ptr<spdlog::logger> LogManager::m_CoreLogger;
-	std::shared_ptr<spdlog::logger> LogManager::m_ClientLogger;
+	std::shared_ptr<spdlog::logger> CLogManager::m_CoreLogger;
+	std::shared_ptr<spdlog::logger> CLogManager::m_ClientLogger;
 
-	void LogManager::Startup()
+	void CLogManager::Startup()
 	{
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		m_CoreLogger = spdlog::stdout_color_mt("DARKSTAR");
@@ -20,7 +20,7 @@ namespace DarkStar
 		DS_CLIENT_TRACE("App Logger Startup");
 	}
 
-	void LogManager::Shutdown()
+	void CLogManager::Shutdown()
 	{
 		DS_CLIENT_TRACE("App Logger Shutdown");
 		DS_CORE_TRACE("Core Logger Shutdown");

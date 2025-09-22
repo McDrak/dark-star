@@ -11,7 +11,7 @@
 
 namespace DarkStar
 {
-	void AssetManager::Startup()
+	void CAssetManager::Startup()
 	{
 		DS_CORE_TRACE("Asset Manager Startup");
 
@@ -25,12 +25,12 @@ namespace DarkStar
 		}
 	}
 
-	void AssetManager::Shutdown()
+	void CAssetManager::Shutdown()
 	{
 		DS_CORE_TRACE("Asset Manager Shutdown");
 	}
 
-	void AssetManager::LoadFromFile(const std::string& filePath)
+	void CAssetManager::LoadFromFile(const std::string& filePath)
 	{
 		std::ifstream file(filePath);
 		if (!file.is_open())
@@ -39,20 +39,22 @@ namespace DarkStar
 		}
 
 		const nlohmann::json assetTypeData = nlohmann::json::parse(file);
-
-		for (const auto& [assetName, assetFilePath] : assetTypeData[AssetUtils::m_FontAssetKey].items())
+		for (const auto& [assetName, assetFilePath] : assetTypeData[CAssetUtils::m_FontAssetKey].items())
 		{
 			const auto& fontIterator = std::find_if(
-				AssetUtils::m_FontStringMatchArray.begin(),
-				AssetUtils::m_FontStringMatchArray.end(),
-				[assetName](const std::pair<Identifiers::Fonts, std::string>& currentMatch)
+				CAssetUtils::m_FontStringMatchArray.begin(),
+				CAssetUtils::m_FontStringMatchArray.end(),
+				[assetName](const std::pair<Identifiers::EFonts, std::string>& currentMatch)
 			{
 				return assetName == currentMatch.second;
 			});
-			if (fontIterator)
+			if (fontIterator != nullptr)
 			{
-				LoadAsset<Identifiers::Fonts, sf::Font>(fontIterator->first, assetFilePath.get<std::string>(), AssetUtils::m_FontLoaderFunction);
+				LoadAsset<Identifiers::EFonts, sf::Font>(fontIterator->first, assetFilePath.get<std::string>(), CAssetUtils::m_FontLoaderFunction);
+				return;
 			}
+
+			DS_CORE_ERROR("AssetManager::LoadFromFile couldn't load asset " + assetName);
 		}
 	}
 }

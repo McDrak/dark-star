@@ -1,25 +1,23 @@
 #pragma once
 
-#include "AssetManager.h"
 #include "Manager.h"
+#include "AssetManager.h"
 #include "DarkStar/Render/Renderer.h"
 
 namespace DarkStar
 {
-	class DARKSTAR_API RenderManager : public Manager
+	class DARKSTAR_API CRenderManager : public IManager
 	{
 	public:
-		RenderManager();
-		~RenderManager() override = default;
+		explicit CRenderManager(const unsigned int height, const unsigned int width, const std::string& windowTitle, const std::shared_ptr<CAssetManager>& assetManager);
+		~CRenderManager() override = default;
 
 		void Startup() override;
 		void Run() override;
 		void Shutdown() override;
 
-		void SetAssetManager(const std::shared_ptr<AssetManager>& assetManager) { m_AssetManager = assetManager; }
-
 	private:
-		Renderer m_Renderer;
-		std::weak_ptr<AssetManager> m_AssetManager;
+		CRenderer m_Renderer;
+		std::weak_ptr<CAssetManager> m_AssetManager;
 	};
 }

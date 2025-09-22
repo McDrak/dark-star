@@ -11,20 +11,20 @@
 
 namespace DarkStar
 {
-	struct AssetHolderKey
+	struct SAssetHolderKey
 	{
 		std::type_index m_IdType;
 		std::type_index m_AssetType;
 
-		bool operator==(const AssetHolderKey& other) const
+		bool operator==(const SAssetHolderKey& other) const
 		{
 			return m_IdType == other.m_IdType && m_AssetType == other.m_AssetType;
 		}
 	};
 
-	struct AssetHolderKeyHash
+	struct SAssetHolderKeyHash
 	{
-		std::size_t operator()(AssetHolderKey const& key) const noexcept
+		std::size_t operator()(SAssetHolderKey const& key) const noexcept
 		{
 			return key.m_IdType.hash_code() ^ (key.m_AssetType.hash_code() << 1);
 		}
@@ -36,16 +36,16 @@ namespace DarkStar
 	};
 
 	template<typename Identifier, typename Asset>
-	struct AssetHolderWrapper : IAssetHolder
+	struct SAssetHolderWrapper : IAssetHolder
 	{
-		AssetHolder<Identifier, Asset> m_Holder;
+		CAssetHolder<Identifier, Asset> m_Holder;
 	};
 
-	class DARKSTAR_API AssetManager : public Manager
+	class DARKSTAR_API CAssetManager : public IManager
 	{
 	public:
-		AssetManager() = default;
-		~AssetManager() override = default;
+		CAssetManager() = default;
+		~CAssetManager() override = default;
 
 		void Startup() override;
 		void Run() override {}
@@ -57,44 +57,44 @@ namespace DarkStar
 		Asset& GetAsset(const Identifier id);
 
 	private:
-		std::unordered_map<AssetHolderKey, std::unique_ptr<IAssetHolder>, AssetHolderKeyHash> m_AssetHolders;
+		std::unordered_map<SAssetHolderKey, std::unique_ptr<IAssetHolder>, SAssetHolderKeyHash> m_AssetHolders;
 
 		template<typename Identifier, typename Asset, typename LoaderFunction>
 		void LoadAsset(Identifier id, const std::string& filePath, LoaderFunction loaderFunction);
 
 		template<typename Identifier, typename Asset>
-		AssetHolder<Identifier, Asset>& GetHolder();
+		CAssetHolder<Identifier, Asset>& GetHolder();
 	};
 
 	template <typename Identifier, typename Asset>
-	Asset& AssetManager::GetAsset(const Identifier id)
+	Asset& CAssetManager::GetAsset(const Identifier id)
 	{
-		AssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
+		CAssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
 		return assetHolder.GetAsset(id);
 	}
 
 	template <typename Identifier, typename Asset, typename LoaderFunction>
-	void AssetManager::LoadAsset(Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
+	void CAssetManager::LoadAsset(Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
 	{
-		AssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
+		CAssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
 		assetHolder.LoadAsset(id, filePath, loaderFunction);
 	}
 
 	template <typename Identifier, typename Asset>
-	AssetHolder<Identifier, Asset>& AssetManager::GetHolder()
+	CAssetHolder<Identifier, Asset>& CAssetManager::GetHolder()
 	{
-		AssetHolderKey assetHolderKey = { std::type_index(typeid(Identifier)), std::type_index(typeid(Asset)) };
+		SAssetHolderKey assetHolderKey = { std::type_index(typeid(Identifier)), std::type_index(typeid(Asset)) };
 		const auto holderIterator = m_AssetHolders.find(assetHolderKey);
 		if (holderIterator == m_AssetHolders.end())
 		{
-			auto assetHolderWrapper = std::make_unique<AssetHolderWrapper<Identifier, Asset>>();
-			AssetHolder<Identifier, Asset>* rawHolderPtr = &assetHolderWrapper->m_Holder;
+			auto assetHolderWrapper = std::make_unique<SAssetHolderWrapper<Identifier, Asset>>();
+			CAssetHolder<Identifier, Asset>* rawHolderPtr = &assetHolderWrapper->m_Holder;
 			m_AssetHolders.emplace(assetHolderKey, std::move(assetHolderWrapper));
 			return *rawHolderPtr;
 		}
 
 		IAssetHolder* basePtr = holderIterator->second.get();
-		auto* foundAssetHolderWrapper = dynamic_cast<AssetHolderWrapper<Identifier, Asset>*>(basePtr);
+		auto* foundAssetHolderWrapper = dynamic_cast<SAssetHolderWrapper<Identifier, Asset>*>(basePtr);
 		if (!foundAssetHolderWrapper)
 		{
 			throw std::runtime_error("AssetManager::GetHolder type mismatch");

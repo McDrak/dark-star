@@ -4,11 +4,10 @@
 
 namespace DarkStar
 {
-	class DARKSTAR_API Manager
+	class DARKSTAR_API IManager
 	{
 	public:
-		Manager() = default;
-		virtual ~Manager() = default;
+		virtual ~IManager() = default;
 
 		virtual void Startup() = 0;
 		virtual void Run() = 0;

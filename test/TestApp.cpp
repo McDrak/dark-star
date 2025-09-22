@@ -1,13 +1,18 @@
 #include "DarkStar.h"
 
-class Test : public DarkStar::Application
+class Test : public DarkStar::CApplication
 {
 public:
-	Test() = default;
+	explicit Test(const DarkStar::SApplicationConfiguration& configuration)
+		: CApplication(configuration)
+	{
+	}
+
 	~Test() override = default;
 };
 
-DarkStar::Application* DarkStar::CreateApplication()
+std::unique_ptr<DarkStar::CApplication> DarkStar::CreateApplication()
 {
-	return new Test();
+	const SApplicationConfiguration configuration("Test App", 800, 600);
+	return std::make_unique<Test>(configuration);
 }

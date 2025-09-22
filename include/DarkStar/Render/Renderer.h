@@ -7,23 +7,22 @@
 
 namespace DarkStar
 {
-	class DARKSTAR_API Renderer
+	class DARKSTAR_API CRenderer
 	{
 	public:
-		Renderer();
-		Renderer(const unsigned int width, const unsigned int height, const char windowName[20]);
+		CRenderer();
+		CRenderer(const unsigned int width, const unsigned int height, const char windowName[20], const std::shared_ptr<CAssetManager>& assetManager);
 
-		~Renderer() = default;
+		~CRenderer() = default;
 
 		void Init();
 		void Render();
-		void SetAssetManager(const std::shared_ptr<AssetManager>& assetManager) { m_AssetManager = assetManager; }
 
 	private:
 		unsigned int m_Width;
 		unsigned int m_Height;
 		char m_WindowName[20];
 		sf::RenderWindow m_Window;
-		std::weak_ptr<AssetManager> m_AssetManager;
+		std::weak_ptr<CAssetManager> m_AssetManager;
 	};
 }
