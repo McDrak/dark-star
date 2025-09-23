@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DarkStar/Core.h"
-#include "DarkStar/Application/Application.h"
+#include "DarkStar/Utils/ConfigurationUtils.h"
 
 #include <memory>
 

@@ -35,10 +35,10 @@ namespace DarkStar
 		virtual ~IAssetHolder() = default;
 	};
 
-	template<typename Identifier, typename Asset>
+	template<typename TIdentifier, typename TAsset>
 	struct SAssetHolderWrapper : IAssetHolder
 	{
-		CAssetHolder<Identifier, Asset> m_Holder;
+		CAssetHolder<TIdentifier, TAsset> m_Holder;
 	};
 
 	class DARKSTAR_API CAssetManager : public IManager
@@ -53,30 +53,30 @@ namespace DarkStar
 
 		void LoadFromFile(const std::string& filePath);
 
-		template<typename Identifier, typename Asset>
-		Asset& GetAsset(const Identifier id);
+		template<typename TIdentifier, typename TAsset>
+		TAsset& GetAsset(const TIdentifier id);
 
 	private:
 		std::unordered_map<SAssetHolderKey, std::unique_ptr<IAssetHolder>, SAssetHolderKeyHash> m_AssetHolders;
 
-		template<typename Identifier, typename Asset, typename LoaderFunction>
-		void LoadAsset(Identifier id, const std::string& filePath, LoaderFunction loaderFunction);
+		template<typename TIdentifier, typename TAsset, typename TLoaderFunction>
+		void LoadAsset(TIdentifier id, const std::string& filePath, TLoaderFunction loaderFunction);
 
-		template<typename Identifier, typename Asset>
-		CAssetHolder<Identifier, Asset>& GetHolder();
+		template<typename TIdentifier, typename TAsset>
+		CAssetHolder<TIdentifier, TAsset>& GetHolder();
 	};
 
-	template <typename Identifier, typename Asset>
-	Asset& CAssetManager::GetAsset(const Identifier id)
+	template <typename TIdentifier, typename TAsset>
+	TAsset& CAssetManager::GetAsset(const TIdentifier id)
 	{
-		CAssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
+		CAssetHolder<TIdentifier, TAsset>& assetHolder = GetHolder<TIdentifier, TAsset>();
 		return assetHolder.GetAsset(id);
 	}
 
-	template <typename Identifier, typename Asset, typename LoaderFunction>
-	void CAssetManager::LoadAsset(Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
+	template <typename TIdentifier, typename TAsset, typename TLoaderFunction>
+	void CAssetManager::LoadAsset(TIdentifier id, const std::string& filePath, TLoaderFunction loaderFunction)
 	{
-		CAssetHolder<Identifier, Asset>& assetHolder = GetHolder<Identifier, Asset>();
+		CAssetHolder<TIdentifier, TAsset>& assetHolder = GetHolder<TIdentifier, TAsset>();
 		assetHolder.LoadAsset(id, filePath, loaderFunction);
 	}
 

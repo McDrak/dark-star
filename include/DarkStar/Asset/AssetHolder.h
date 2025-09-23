@@ -9,26 +9,26 @@
 
 namespace DarkStar
 {
-	template<typename Identifier, typename Asset>
+	template<typename TIdentifier, typename TAsset>
 	class DARKSTAR_API CAssetHolder
 	{
-		using LoaderFunction = std::function<bool(Asset&, const std::string&)>;
+		using LoaderFunction = std::function<bool(TAsset&, const std::string&)>;
 
 	public:
 		CAssetHolder() = default;
 		virtual ~CAssetHolder() = default;
 
-		void LoadAsset(const Identifier id, const std::string& filePath, LoaderFunction loaderFunction);
-		Asset& GetAsset(const Identifier id);
+		void LoadAsset(const TIdentifier id, const std::string& filePath, LoaderFunction loaderFunction);
+		TAsset& GetAsset(const TIdentifier id);
 
 	private:
-		std::unordered_map<Identifier, std::unique_ptr<Asset>> m_Assets;
+		std::unordered_map<TIdentifier, std::unique_ptr<TAsset>> m_Assets;
 	};
 
-	template <typename Identifier, typename Asset>
-	void CAssetHolder<Identifier, Asset>::LoadAsset(const Identifier id, const std::string& filePath, LoaderFunction loaderFunction)
+	template <typename TIdentifier, typename TAsset>
+	void CAssetHolder<TIdentifier, TAsset>::LoadAsset(const TIdentifier id, const std::string& filePath, LoaderFunction loaderFunction)
 	{
-		std::unique_ptr<Asset> assetPtr = std::make_unique<Asset>();
+		std::unique_ptr<TAsset> assetPtr = std::make_unique<TAsset>();
 		if (!loaderFunction(*assetPtr, filePath))
 		{
 			throw std::runtime_error("AssetHolder::LoadAsset failed to load asset " + filePath);
@@ -37,8 +37,8 @@ namespace DarkStar
 		m_Assets.emplace(id, std::move(assetPtr));
 	}
 
-	template <typename Identifier, typename Asset>
-	Asset& CAssetHolder<Identifier, Asset>::GetAsset(const Identifier id)
+	template <typename TIdentifier, typename TAsset>
+	TAsset& CAssetHolder<TIdentifier, TAsset>::GetAsset(const TIdentifier id)
 	{
 		if (!m_Assets.contains(id))
 		{
