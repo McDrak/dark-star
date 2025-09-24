@@ -39,8 +39,11 @@ namespace DarkStar
 		}
 
 		const nlohmann::json assetTypeData = nlohmann::json::parse(file);
+
+		// Iterate declared fonts and load them via the typed holder.
 		for (const auto& [assetName, assetFilePath] : assetTypeData[CAssetUtils::m_FontAssetKey].items())
 		{
+			// Find the matching enum identifier for the asset name.
 			const auto& fontIterator = std::find_if(
 				CAssetUtils::m_FontStringMatchArray.begin(),
 				CAssetUtils::m_FontStringMatchArray.end(),
@@ -48,12 +51,15 @@ namespace DarkStar
 			{
 				return assetName == currentMatch.second;
 			});
+
+			// If matched, load the asset using the registered loader function.
 			if (fontIterator != nullptr)
 			{
 				LoadAsset<Identifiers::EFonts, sf::Font>(fontIterator->first, assetFilePath.get<std::string>(), CAssetUtils::m_FontLoaderFunction);
 				return;
 			}
 
+			// Report unmatched asset entries.
 			DS_CORE_ERROR("AssetManager::LoadFromFile couldn't load asset " + assetName);
 		}
 	}
